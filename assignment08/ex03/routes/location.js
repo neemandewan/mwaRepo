@@ -157,19 +157,6 @@ router.get('/addindex', function(req, res, next) {
 	});
 });
 
-router.get('/addgeometry', function(req, res, next) {
-
-	const collection = db.get().collection(collectionName);
-
-	let query = { geometry: "2dsphere" };
-	
-  	collection.ensureIndex(query, (err, doc) => {
-		if(err) throw err;
-
-		res.status(200).json(doc);
-	});
-});
-
 router.post('/search', checkSearch, function(req, res, next) {
 
 		const errors = validationResult(req);
@@ -186,59 +173,10 @@ router.post('/search', checkSearch, function(req, res, next) {
 			let coordinates = [];
 			coordinates[0] = loc.longitude;
 			coordinates[1] = loc.latitude;
-
-			/*let query = {
-				location: {
-					$near: {
-					  	$geometry: {
-					    	type: "Point",
-					    	coordinates: coordinates
-					  	}
-					},
-					$maxDistance: 2000
-				}
-			};
-
-			console.log(query.location.$near.$geometry.coordinates);*/
-
-			/*let query = {
-				location: {
-					$near: {
-					  	$geometry: {
-					  		//category: loc.category,
-        					location: coordinates
-					  	}
-					},
-					$maxDistance: 2000
-				}
-			};*/
-
-			/*let query = {
-			   	location: {
-			      	type: "Point",
-			      	coordinates: coordinates
-			   	}
-			}*/
-
-			//let query = { geometry: { $geoIntersects: { $geometry: { type: "Point", coordinates: coordinates } } } }
-			/*console.log(coordinates);
-			var neighborhood = collection.findOne( 
-				{ 
-					geometry: { 
-						$geoIntersects: { 
-							$geometry: { type: "Point", coordinates: [ defLong, defLat ] } 
-						} 
-					} 
-				} 
-			);
-
-			var query = { location: { $geoWithin: { $geometry: neighborhood.geometry } } };
-
-			console.log(query);*/
 			
 			// within 5 miles
-			var query = { location:{ $geoWithin:
-      			{ $centerSphere: [ [ defLong, defLat ], 5 / 3963.2 ] } } }
+			var query = {$and : [{ location:{ $geoWithin:
+      			{ $centerSphere: [ [ loc.longitude, loc.latitude ], 5 / 3963.2 ] } } }, {'category': loc.category}]}
 
 			collection.find(query).limit(10).toArray(function(err, docs) {
 	    		res.send(docs);
