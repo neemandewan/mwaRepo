@@ -15,13 +15,11 @@
 	{"district": "Bronx"}, {"district": "Brooklyn"}]}, {restaurant_id:1, name: 1, district: 1, cuisine:1 })
 15. db.restaurants.find({"district": {$nin : ["Staten Island", "Queens", "Bronx", "Brooklyn"]}}, 
 	{restaurant_id:1, name: 1, district: 1, cuisine:1 })
-16. db.restaurants.find({"grades.score": {$lt: 11}}, {restaurant_id:1, name: 1, district: 1, cuisine:1 })
-17. db.restaurants.find({"address.coord.1":{$gt:42,$lt:52}},{"restaurant_id":1, "name":1, "address":1, "address.coord":1})
-
+16. db.restaurants.find({"grades.score": {$lt: 11}}, {restaurant_id: 1, name: 1, district: 1, cuisine: 1 })
+17. db.restaurants.find({"address.coord.1": {$gt:42, $lte:52}}, {"restaurant_id": 1, "name": 1, "address": 1, "address.coord": 1})
 18. db.restaurants.find().sort({"name":1})
 19. db.restaurants.find().sort({"name":-1})
-
-20. db.restaurants.find().sort({"cuisine":1,"district" : -1,})
-21. db.restaurants.find({"address.street":{$exists : true }})
-22. db.restaurants.find({"address.coord" : {$type : 1}})
-23. db.restaurants.find({name:{ $regex : /^Mad/i, }},{"name":1,"district":1,"address.coord":1,"cuisine" :1})
+20. db.restaurants.find().sort({"cuisine": 1, "district" : -1,})
+21. db.restaurants.find({"address.street": {$exists : true }})
+22. db.restaurants.find({"address.coord": {$type : 1}})
+23. db.restaurants.find({name: { $regex: /^Mad/i }}, {"name": 1, "district": 1, "address.coord": 1, "cuisine": 1})
