@@ -10,14 +10,19 @@ import { User } from '../../model/user.model';
 export class WelcomeComponent implements OnInit {
 
   user: User = new User();
+  sub;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     console.log(this.route.queryParams)
-    this.route.queryParams.subscribe(
+    this.sub = this.route.queryParams.subscribe(
       x=> Object.assign(this.user, x)
     );
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

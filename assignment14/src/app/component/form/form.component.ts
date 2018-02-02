@@ -18,6 +18,9 @@ export class FormComponent implements OnInit {
   userInfo: any;
   userPost: any;
 
+  userInfoSub: any;
+  userPostSub: any;
+
   constructor(public myHttpService: UtilService, private formBuilder: FormBuilder, private router: Router) {
     this.form = formBuilder.group({
       'username': ['', [Validators.required]],
@@ -56,7 +59,7 @@ export class FormComponent implements OnInit {
   }
 
   getData() {
-    this.myHttpService.getUser().subscribe(
+    this.userInfoSub = this.myHttpService.getUser().subscribe(
       res => {
         console.log(res);
         this.userInfo = res;
@@ -65,7 +68,7 @@ export class FormComponent implements OnInit {
       () => console.log('Operation fetch user conpleted!')
     );
 
-    this.myHttpService.getUserPosts().subscribe(
+    this.userPostSub = this.myHttpService.getUserPosts().subscribe(
       res => {
         console.log(res);
         this.userPost = res;
@@ -76,6 +79,11 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.userInfoSub.unsubscribe();
+    this.userPostSub.unsubscribe();
   }
 
 }
