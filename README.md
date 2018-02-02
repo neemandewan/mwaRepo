@@ -4,10 +4,10 @@ This contains all the assignment done related to Modern Web Applications CS572 i
 
 ```
 **Framework and technologies used:**
-1. NodeJS
-2. ExpressJS
-3. MongoDB
-4. Angular
+  1. NodeJS
+  2. ExpressJS
+  3. MongoDB
+  4. Angular
 
 ```
 
@@ -15,4 +15,4 @@ This contains all the assignment done related to Modern Web Applications CS572 i
 
 Prabhab Dewan
 
-For more details see [GitHub Flavored Markdown](https://neemandewan.github.io/mwaRepo/).
+For more details see [neemandewan](https://neemandewan.github.io/mwaRepo/).
