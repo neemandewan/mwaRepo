@@ -15,4 +15,4 @@ This contains all the assignment done related to Modern Web Applications CS572 i
 
 Prabhab Dewan
 
-For more details see [neemandewan](https://neemandewan.github.io/mwaRepo/).
+For more details see https://neemandewan.github.io/mwaRepo/
